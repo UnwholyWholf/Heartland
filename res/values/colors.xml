@@ -1,0 +1,9 @@
+<resources>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="black">#000000</color>
+    <color name="grass_green">#007f00</color>
+    <color name="sand_tan">#b79035</color>
+    <color name="water_blue">#0063c5</color>
+
+</resources>
