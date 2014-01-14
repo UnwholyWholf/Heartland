@@ -10,6 +10,8 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
+//	Ryan Haskell
+
 public class MainActivity extends Activity 
 {
 	public static final int VISIBLE_TILE_WIDTH = 20;
