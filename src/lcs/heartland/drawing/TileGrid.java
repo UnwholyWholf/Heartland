@@ -65,7 +65,10 @@ public class TileGrid extends RelativeLayout
 		
 		while(tilesLeft > 0)
 		{
-			//if(tileButtons[x][y])
+			if(tileButtons[x][y].getTile()==null)
+			{
+				
+			}
 		}
 	}
 }

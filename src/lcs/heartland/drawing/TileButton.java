@@ -54,4 +54,13 @@ public class TileButton extends ImageButton
 		this.setImageResource(foregroundResources[myTile.getForeground().ordinal()]);
 	}
 
+	public void setTile(Tile t)
+	{
+		myTile = t;
+	}
+	
+	public Tile getTile()
+	{
+		return myTile;
+	}
 }
