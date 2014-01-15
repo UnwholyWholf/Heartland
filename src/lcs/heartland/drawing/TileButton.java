@@ -12,16 +12,21 @@ public class TileButton extends ImageButton
 	private static int[] foregroundResources = null;
 	private static int[] backgroundResources = null;
 	
-	public TileButton(Context context) 
+	public TileButton(Context context, Tile t) 
 	{
 		super(context);
 		
+		myTile = t;
+		
+		initTileButton();
+	}
+	
+	public static void generateResources()
+	{
 		if (foregroundResources == null)
 			setForegroundResources();
 		if (backgroundResources == null)
 			setBackgroundResources();
-		
-		initTileButton();
 	}
 	
 	private void initTileButton()
@@ -31,7 +36,7 @@ public class TileButton extends ImageButton
 		this.setPadding(0, 0, 0, 0);
 	}
 	
-	private void setForegroundResources()
+	private static void setForegroundResources()
 	{
 		foregroundResources = new int[]
 			{-1, 
@@ -40,7 +45,7 @@ public class TileButton extends ImageButton
 			 R.drawable.red_flower,
 			 R.drawable.yellow_flower};
 	}
-	private void setBackgroundResources()
+	private static void setBackgroundResources()
 	{
 		backgroundResources = new int[]
 			{R.color.grass_green, 

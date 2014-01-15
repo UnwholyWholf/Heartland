@@ -1,13 +1,14 @@
 package lcs.heartland.drawing;
 
 import lcs.heartland.R;
+import lcs.heartland.gameworld.Tile;
 import android.app.Activity;
 import android.content.Context;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
 public class TileGrid extends RelativeLayout
-{	
+{
 	private int num_cols;
 	private int num_rows;
 	
@@ -27,9 +28,13 @@ public class TileGrid extends RelativeLayout
 		num_cols = w+1;
 		num_rows = h+1;
 		
+		TileButton.generateResources();
+		
 		createGrid();
 		
-		//temporaryFunGenerator();
+		temporaryFunGenerator();
+		
+		updateTileImages();
 	}
 	
 	private void createGrid()
@@ -40,7 +45,7 @@ public class TileGrid extends RelativeLayout
 		{
 			for (int y = 0; y < num_rows; y++)
 			{				
-		        TileButton bt = new TileButton(getContext());
+		        TileButton bt = new TileButton(getContext(), new Tile(Tile.Foreground.EMPTY, Tile.Background.GRASS));
 
 		        LayoutParams params = new RelativeLayout.LayoutParams(tileSize, tileSize);
 		        params.leftMargin = (tileSize*x);
@@ -51,6 +56,11 @@ public class TileGrid extends RelativeLayout
         		this.addView(bt, params);
 			}
 		}
+	}
+	
+	public void move(int dir)
+	{
+		
 	}
 	
 	public void updateTileImages()
@@ -80,8 +90,6 @@ public class TileGrid extends RelativeLayout
 			
 			curTileX = (curTileX+1)%num_cols;
 		}
-		
-		for()
 	}
 	
 	private void temporaryFunGenerator()
