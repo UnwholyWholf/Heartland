@@ -9,13 +9,13 @@ import android.widget.RelativeLayout;
 @SuppressLint("ViewConstructor")
 public class TileGrid extends RelativeLayout
 {
-	private static final int BUFFER_TILE_SIZE = 4;
+	private static final int BUFFER_TILE_SIZE = 5;
 	
 	private int num_cols;
 	private int num_rows;
 	
-	private int curX;
-	private int curY;
+	private int originX;
+	private int originY;
 	
 	private int tileSize;
 	
@@ -67,13 +67,14 @@ public class TileGrid extends RelativeLayout
 	public void move(int dir)
 	{
 		if (dir == 0)
-			curY=(curY-1)%num_rows;
+			originY=(originY-1+num_rows)%num_rows;
 		if (dir == 1)
-			curX=(curX+1)%num_cols;
+			originX=(originX+1)%num_cols;
 		if (dir == 2)
-			curY=(curY+1)%num_rows;
+			originY=(originY+1)%num_rows;
 		if (dir == 3)
-			curX=(curX-1)%num_cols;
+			originX=(originX-1+num_cols)%num_cols;
+		
 		updateTileLocations();
 	}
 	
@@ -90,14 +91,18 @@ public class TileGrid extends RelativeLayout
 		{
 			for (int y = 0; y < num_rows; y++)
 			{
+				int[] loc = getButtonVisibleLoc(tileButtons[x][y]);
+				
+				if (y == 0 && x == 0)
+					System.out.println("VLoc: "+loc[0]+","+loc[1]);
+				
 				LayoutParams params = new RelativeLayout.LayoutParams(tileSize, tileSize);
-		        params.leftMargin = (tileSize*x);
-				params.topMargin  = (tileSize*y);
+		        params.leftMargin = (tileSize*loc[0]);
+				params.topMargin  = (tileSize*loc[1]);
 				params.height = tileSize;
 				params.width = tileSize;
 				
-				int[] loc = convertGridXYtoVisibleXY(new int[]{x,y});
-				tileButtons[loc[0]][loc[1]].setLayoutParams(params);
+				tileButtons[x][y].setLayoutParams(params);
 			}
 		}
 	}
@@ -119,8 +124,8 @@ public class TileGrid extends RelativeLayout
 	{
 		int[] Vloc = new int[2];
 		
-		Vloc[0] = (Gloc[0]-curX)%num_cols;
-		Vloc[1] = (Gloc[1]-curY)%num_rows;
+		Vloc[0] = (Gloc[0]-originX+num_cols)%num_cols;
+		Vloc[1] = (Gloc[1]-originY+num_rows)%num_rows;
 		
 		return Vloc;
 	}
