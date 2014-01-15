@@ -5,4 +5,5 @@ Ryan Kelch
 ----------------------------------------------------------
 README.txt
 
-Stuff...
+I have now expanded the readme
+
