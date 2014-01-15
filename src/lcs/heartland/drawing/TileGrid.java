@@ -2,10 +2,8 @@ package lcs.heartland.drawing;
 
 import lcs.heartland.R;
 import lcs.heartland.gameworld.Tile;
-import android.app.Activity;
 import android.content.Context;
 import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 
 public class TileGrid extends RelativeLayout
 {
@@ -45,7 +43,7 @@ public class TileGrid extends RelativeLayout
 		{
 			for (int y = 0; y < num_rows; y++)
 			{				
-		        TileButton bt = new TileButton(getContext(), new Tile(Tile.Foreground.EMPTY, Tile.Background.GRASS));
+		        TileButton bt = new TileButton(getContext(), new Tile(Tile.Foreground.EMPTY, Tile.Background.GRASS), x, y);
 
 		        LayoutParams params = new RelativeLayout.LayoutParams(tileSize, tileSize);
 		        params.leftMargin = (tileSize*x);
@@ -60,7 +58,15 @@ public class TileGrid extends RelativeLayout
 	
 	public void move(int dir)
 	{
-		
+		if (dir == 0)
+			curY=(curY-1)%num_rows;
+		if (dir == 1)
+			curX=(curX+1)%num_cols;
+		if (dir == 2)
+			curY=(curY+1)%num_rows;
+		if (dir == 3)
+			curX=(curX-1)%num_cols;
+		updateTileLocations();
 	}
 	
 	public void updateTileImages()

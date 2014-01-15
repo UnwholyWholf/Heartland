@@ -7,16 +7,20 @@ import android.widget.ImageButton;
 
 public class TileButton extends ImageButton 
 {
-	private Tile myTile;
-	
 	private static int[] foregroundResources = null;
 	private static int[] backgroundResources = null;
 	
-	public TileButton(Context context, Tile t) 
+	private Tile myTile;
+	private int x;
+	private int y;
+	
+	public TileButton(Context context, Tile t, int x, int y) 
 	{
 		super(context);
 		
 		myTile = t;
+		this.x = x;
+		this.y = y;
 		
 		initTileButton();
 	}
@@ -43,7 +47,8 @@ public class TileButton extends ImageButton
 			 R.drawable.tree, 
 			 R.drawable.rock,
 			 R.drawable.red_flower,
-			 R.drawable.yellow_flower};
+			 R.drawable.yellow_flower,
+			 R.drawable.bear};
 	}
 	private static void setBackgroundResources()
 	{
