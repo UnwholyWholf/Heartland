@@ -2,6 +2,7 @@ package lcs.heartland.drawing;
 
 import lcs.heartland.R;
 import lcs.heartland.gameworld.Tile;
+import lcs.heartland.gameworld.World;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.widget.RelativeLayout;
@@ -19,9 +20,11 @@ public class TileGrid extends RelativeLayout
 	
 	private int tileSize;
 	
+	private World world;
+	
 	private TileButton[][] tileButtons;
 	
-	public TileGrid(int w, int h, Context a, OnClickListener listener)
+	public TileGrid(int w, int h, Context a, OnClickListener listener, World world)
 	{
 		super(a);
 		
@@ -29,12 +32,13 @@ public class TileGrid extends RelativeLayout
 		
 		num_cols = w+BUFFER_TILE_SIZE;
 		num_rows = h+BUFFER_TILE_SIZE;
+		this.world = world;
 		
 		TileButton.generateResources();
 		
 		createGrid(listener);
 		
-		temporaryFunGenerator();
+		//temporaryFunGenerator();
 		
 		updateTileImages();
 	}

@@ -64,8 +64,8 @@ public class MainActivity extends Activity
 			
 			int[] Gloc = tb.getGridXY();
 			
-			System.out.println("Tapped Grid ("+Gloc[0]+","+Gloc[1]+")");
-			System.out.println("Tapped Vis  ("+loc[0]+","+loc[1]+")");
+			//System.out.println("Tapped Grid ("+Gloc[0]+","+Gloc[1]+")");
+			//System.out.println("Tapped Vis  ("+loc[0]+","+loc[1]+")");
 			
 			if (loc[0] == 0)
 				grid.move(3); //Left
