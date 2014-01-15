@@ -44,8 +44,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int red_flower=0x7f020004;
         public static final int rock=0x7f020005;
         public static final int skeleton=0x7f020006;
-        public static final int tree=0x7f020007;
-        public static final int yellow_flower=0x7f020008;
+        public static final int steve=0x7f020007;
+        public static final int tree=0x7f020008;
+        public static final int yellow_flower=0x7f020009;
     }
     public static final class id {
         public static final int action_settings=0x7f090001;

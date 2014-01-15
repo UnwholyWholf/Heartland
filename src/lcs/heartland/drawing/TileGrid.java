@@ -53,6 +53,39 @@ public class TileGrid extends RelativeLayout
 		}
 	}
 	
+	public void updateTileImages()
+	{
+		for (int x = 0; x < num_cols; x++)
+			for (int y = 0; y < num_rows; y++)
+				tileButtons[x][y].updateImage();
+	}
+	
+	public void updateTileLocations()
+	{
+		int curTileX = curX;
+		int curTileY = curY;
+		for (int x = 0; x < num_cols; x++)
+		{
+			for (int y = 0; y < num_rows; y++)
+			{
+				LayoutParams params = new RelativeLayout.LayoutParams(tileSize, tileSize);
+		        params.leftMargin = (tileSize*curX);
+				params.topMargin  = (tileSize*curY);
+				params.height = tileSize;
+				params.width = tileSize;
+				tileButtons[x][y].setLayoutParams(params);
+				
+				curY++;
+				if (curY > num_rows)
+					curY = 0;
+			}
+			
+			curX++;
+			if (curX > num_cols)
+				curX++;
+		}
+	}
+	
 	private void temporaryFunGenerator()
 	{
 		int variancePercentage = 25;	//	Chance that the next tile will differ from it's majority surrounding.
