@@ -69,21 +69,19 @@ public class TileGrid extends RelativeLayout
 			for (int y = 0; y < num_rows; y++)
 			{
 				LayoutParams params = new RelativeLayout.LayoutParams(tileSize, tileSize);
-		        params.leftMargin = (tileSize*curX);
-				params.topMargin  = (tileSize*curY);
+		        params.leftMargin = (tileSize*x);
+				params.topMargin  = (tileSize*y);
 				params.height = tileSize;
 				params.width = tileSize;
-				tileButtons[x][y].setLayoutParams(params);
+				tileButtons[curTileX][curTileY].setLayoutParams(params);
 				
-				curY++;
-				if (curY > num_rows)
-					curY = 0;
+				curTileY = (curTileY+1)%num_rows;
 			}
 			
-			curX++;
-			if (curX > num_cols)
-				curX++;
+			curTileX = (curTileX+1)%num_cols;
 		}
+		
+		for()
 	}
 	
 	private void temporaryFunGenerator()
