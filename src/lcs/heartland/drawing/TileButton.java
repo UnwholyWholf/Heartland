@@ -11,6 +11,7 @@ public class TileButton extends ImageButton
 {
 	private static int[] foregroundResources = null;
 	private static int[] backgroundResources = null;
+	private static final int EMPTY_FOREGROUND = -1;
 	
 	private Tile myTile;
 	private int x;
@@ -45,7 +46,7 @@ public class TileButton extends ImageButton
 	private static void setForegroundResources()
 	{
 		foregroundResources = new int[]
-			{-1, 
+			{EMPTY_FOREGROUND, 
 			 R.drawable.tree, 
 			 R.drawable.rock,
 			 R.drawable.red_flower,
@@ -63,7 +64,9 @@ public class TileButton extends ImageButton
 	public void updateImage()
 	{
 		this.setBackgroundColor(getContext().getResources().getColor(backgroundResources[myTile.getBackground().ordinal()]));
-		this.setImageResource(foregroundResources[myTile.getForeground().ordinal()]);
+		int foreResource = foregroundResources[myTile.getForeground().ordinal()];
+		if (foreResource != EMPTY_FOREGROUND)
+			this.setImageResource(foreResource);
 	}
 
 	public void setTile(Tile t)
@@ -75,6 +78,11 @@ public class TileButton extends ImageButton
 		return myTile;
 	}
 
+	public void setGridXY(int[] loc)
+	{
+		x = loc[0];
+		y = loc[1];
+	}
 	public void setGridXY(int x, int y)
 	{
 		this.x = x;
@@ -95,5 +103,12 @@ public class TileButton extends ImageButton
 	public int getGridY()
 	{
 		return y;
+	}
+	public int[] getGridXY()
+	{
+		int[] loc = new int[2];
+		loc[0] = x;
+		loc[1] = y;
+		return loc;
 	}
 }

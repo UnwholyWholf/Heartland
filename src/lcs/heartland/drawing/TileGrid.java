@@ -2,11 +2,15 @@ package lcs.heartland.drawing;
 
 import lcs.heartland.R;
 import lcs.heartland.gameworld.Tile;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.widget.RelativeLayout;
 
+@SuppressLint("ViewConstructor")
 public class TileGrid extends RelativeLayout
 {
+	private static final int BUFFER_TILE_SIZE = 4;
+	
 	private int num_cols;
 	private int num_rows;
 	
@@ -17,25 +21,25 @@ public class TileGrid extends RelativeLayout
 	
 	private TileButton[][] tileButtons;
 	
-	public TileGrid(int w, int h, Context a)
+	public TileGrid(int w, int h, Context a, OnClickListener listener)
 	{
 		super(a);
 		
 		tileSize = getContext().getResources().getDimensionPixelSize(R.dimen.tileDimension);
 		
-		num_cols = w+1;
-		num_rows = h+1;
+		num_cols = w+BUFFER_TILE_SIZE;
+		num_rows = h+BUFFER_TILE_SIZE;
 		
 		TileButton.generateResources();
 		
-		createGrid();
+		createGrid(listener);
 		
 		temporaryFunGenerator();
 		
 		updateTileImages();
 	}
 	
-	private void createGrid()
+	private void createGrid(OnClickListener listener)
 	{
 		tileButtons = new TileButton[num_cols][num_rows];
 		
@@ -51,7 +55,11 @@ public class TileGrid extends RelativeLayout
 				params.height = tileSize;
 				params.width = tileSize;
 				
+				bt.setOnClickListener(listener);
+				
         		this.addView(bt, params);
+        		
+          		tileButtons[x][y] = bt;
 			}
 		}
 	}
@@ -78,8 +86,6 @@ public class TileGrid extends RelativeLayout
 	
 	public void updateTileLocations()
 	{
-		int curTileX = curX;
-		int curTileY = curY;
 		for (int x = 0; x < num_cols; x++)
 		{
 			for (int y = 0; y < num_rows; y++)
@@ -89,28 +95,52 @@ public class TileGrid extends RelativeLayout
 				params.topMargin  = (tileSize*y);
 				params.height = tileSize;
 				params.width = tileSize;
-				tileButtons[curTileX][curTileY].setLayoutParams(params);
 				
-				curTileY = (curTileY+1)%num_rows;
+				int[] loc = convertGridXYtoVisibleXY(new int[]{x,y});
+				tileButtons[loc[0]][loc[1]].setLayoutParams(params);
 			}
-			
-			curTileX = (curTileX+1)%num_cols;
 		}
+	}
+	
+	public int getVisibleWidth()
+	{
+		return num_cols-BUFFER_TILE_SIZE;
+	}
+	public int getVisibleHeight()
+	{
+		return num_rows-BUFFER_TILE_SIZE;
+	}
+	
+	public int[] getButtonVisibleLoc(TileButton tb)
+	{
+		return convertGridXYtoVisibleXY(tb.getGridXY());
+	}
+	private int[] convertGridXYtoVisibleXY(int[] Gloc)
+	{
+		int[] Vloc = new int[2];
+		
+		Vloc[0] = (Gloc[0]-curX)%num_cols;
+		Vloc[1] = (Gloc[1]-curY)%num_rows;
+		
+		return Vloc;
 	}
 	
 	private void temporaryFunGenerator()
 	{
 		int bearWeight 		= 1;
-		int rockWeight 		= 2;
-		int flowerWeight 	= 3;
-		int treeWeight 		= 4;
-		int emptyWeight		= 5;
+		int rockWeight 		= 1;
+		int flowerWeight 	= 1;
+		int treeWeight 		= 15;
+		int emptyWeight		= 20;
+		
+		
+		/////////////////////////////////////////////////////////
 		int total = emptyWeight + treeWeight + rockWeight + flowerWeight + bearWeight;		//	10
 	
 		int bear = bearWeight;													//	1
-		int rock = rockWeight + bearWeight;										//	3
-		int flower = flowerWeight + rockWeight + bearWeight;					//	6
-		int tree = treeWeight + flowerWeight + rockWeight + bearWeight;			//	10
+		int rock = rockWeight + bear;										//	3
+		int flower = flowerWeight + rock;					//	6
+		int tree = treeWeight + flower;			//	10
 		
 		int rand = 0;
 		Tile.Foreground foreground;
