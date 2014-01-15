@@ -94,21 +94,28 @@ public class TileGrid extends RelativeLayout
 	
 	private void temporaryFunGenerator()
 	{
-		int treeWeight = 1;
-		int rockWeight = 1;
-		int flowerWeight = 1;
-		int bearWeight = 1;
+		int bearWeight 		= 1;
+		int rockWeight 		= 2;
+		int flowerWeight 	= 3;
+		int treeWeight 		= 4;
 		
-		int total = treeWeight+rockWeight+flowerWeight+bearWeight;
+		int total = treeWeight + rockWeight + flowerWeight + bearWeight;		//	10
 	
-		int tree = treeWeight;
+		int bear = bearWeight;													//	1
+		int rock = rockWeight + bearWeight;										//	3
+		int flower = flowerWeight + rockWeight + bearWeight;					//	6
+		int tree = treeWeight + flowerWeight + rockWeight + bearWeight;			//	10
 		
 		int rand = 0;
+		Tile.Foreground foreground;
 		
 		for(int x = 0; x < num_cols; x++)
 			for(int y = 0; y < num_rows; y++)
 			{
-				rand = (int)(Math.random()*TOTAL);
+				rand = (int)(Math.random()*total);
+				
+				if(rand < bear) 		foreground = Tile.Foreground.BEAR;
+				else if(rand < rock)	foreground = Tile.Foreground.ROCK;
 			}
 	}
 }
