@@ -24,6 +24,18 @@ public class Tile
 		background = b;
 	}
 	
+	public Tile(Foreground f)
+	{
+		foreground = f;
+		background = Background.GRASS;
+	}
+	
+	public Tile(Background b)
+	{
+		foreground = Foreground.EMPTY;
+		background = b;
+	}
+	
 	public Foreground getForeground()
 	{
 		return foreground;
