@@ -86,20 +86,21 @@ public class TileGrid extends RelativeLayout
 	
 	private void temporaryFunGenerator()
 	{
-		int variancePercentage = 25;	//	Chance that the next tile will differ from it's majority surrounding.
-		int neighborsAveraged = 1;		//	Radial distance from tile that is checked for majority.
+		int treeWeight = 1;
+		int rockWeight = 1;
+		int flowerWeight = 1;
+		int bearWeight = 1;
 		
-		int x = (int)(Math.random()*num_cols);	//	Random starting position is
-		int y = (int)(Math.random()*num_rows);	//	calculated.
+		int total = treeWeight+rockWeight+flowerWeight+bearWeight;
+	
+		int tree = treeWeight;
 		
-		int tilesLeft = num_rows*num_cols;
+		int rand = 0;
 		
-		while(tilesLeft > 0)
-		{
-			if(tileButtons[x][y].getTile()==null)
+		for(int x = 0; x < num_cols; x++)
+			for(int y = 0; y < num_rows; y++)
 			{
-				
+				rand = (int)(Math.random()*TOTAL);
 			}
-		}
 	}
 }
