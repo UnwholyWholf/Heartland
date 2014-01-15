@@ -104,8 +104,8 @@ public class TileGrid extends RelativeLayout
 		int rockWeight 		= 2;
 		int flowerWeight 	= 3;
 		int treeWeight 		= 4;
-		
-		int total = treeWeight + rockWeight + flowerWeight + bearWeight;		//	10
+		int emptyWeight		= 5;
+		int total = emptyWeight + treeWeight + rockWeight + flowerWeight + bearWeight;		//	10
 	
 		int bear = bearWeight;													//	1
 		int rock = rockWeight + bearWeight;										//	3
@@ -122,6 +122,11 @@ public class TileGrid extends RelativeLayout
 				
 				if(rand < bear) 		foreground = Tile.Foreground.BEAR;
 				else if(rand < rock)	foreground = Tile.Foreground.ROCK;
+				else if(rand < flower)	foreground = Tile.Foreground.FLOWER_RED;
+				else if(rand < tree)	foreground = Tile.Foreground.TREE;
+				else 					foreground = Tile.Foreground.EMPTY;
+				
+				tileButtons[x][y].setTile(new Tile(foreground));
 			}
 	}
 }
