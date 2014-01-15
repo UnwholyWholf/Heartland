@@ -7,7 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
 public class TileGrid extends RelativeLayout
-{	
+{
 	private int num_cols;
 	private int num_rows;
 	
