@@ -2,9 +2,11 @@ package lcs.heartland.drawing;
 
 import lcs.heartland.R;
 import lcs.heartland.gameworld.Tile;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.widget.ImageButton;
 
+@SuppressLint("ViewConstructor")
 public class TileButton extends ImageButton 
 {
 	private static int[] foregroundResources = null;
@@ -68,9 +70,30 @@ public class TileButton extends ImageButton
 	{
 		myTile = t;
 	}
-	
 	public Tile getTile()
 	{
 		return myTile;
+	}
+
+	public void setGridXY(int x, int y)
+	{
+		this.x = x;
+		this.y = y;
+	}
+	public void setGridX(int x)
+	{
+		this.x = x;
+	}
+	public void setGridY(int y)
+	{
+		this.y = y;
+	}
+	public int getGridX()
+	{
+		return x;
+	}
+	public int getGridY()
+	{
+		return y;
 	}
 }

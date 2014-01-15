@@ -1,6 +1,5 @@
 package lcs.heartland;
 
-import lcs.heartland.drawing.TileButton;
 import lcs.heartland.drawing.TileGrid;
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,8 +8,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
-
-//	Ryan Haskell
 
 public class MainActivity extends Activity 
 {
