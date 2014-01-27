@@ -2,6 +2,7 @@ package lcs.heartland;
 
 import lcs.heartland.drawing.TileButton;
 import lcs.heartland.drawing.TileGrid;
+import lcs.heartland.gameworld.World;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,6 +18,7 @@ public class MainActivity extends Activity
 	public static final int VISIBLE_TILE_WIDTH = 20;
 	public static final int VISIBLE_TILE_HEIGHT = 11;
 	
+	private World mainWorld;
 	private TileGrid grid;
 
 	@Override
@@ -31,14 +33,17 @@ public class MainActivity extends Activity
 		
 		setContentView(R.layout.activity_main);
 		
+		mainWorld = new World();
+		
 		initTileGrid();	
 	}
 	
 	public void initTileGrid()
 	{
-		int tileSize = getResources().getDimensionPixelSize(R.dimen.tileDimension);
 		grid = new TileGrid(VISIBLE_TILE_WIDTH, VISIBLE_TILE_HEIGHT, this,
-							new tileButtonListener());
+							new tileButtonListener(), mainWorld);
+		
+		int tileSize = getResources().getDimensionPixelSize(R.dimen.tileDimension);
 		LayoutParams params = new RelativeLayout.LayoutParams(tileSize*VISIBLE_TILE_WIDTH, tileSize*VISIBLE_TILE_HEIGHT);
 		this.addContentView(grid, params);
 	}

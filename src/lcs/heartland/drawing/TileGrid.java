@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 @SuppressLint("ViewConstructor")
 public class TileGrid extends RelativeLayout
 {
-	private static final int BUFFER_TILE_SIZE = 5;
+	private static final int BUFFER_TILE_SIZE = 2;
 	
 	private int num_cols;
 	private int num_rows;
@@ -30,8 +30,8 @@ public class TileGrid extends RelativeLayout
 		
 		tileSize = getContext().getResources().getDimensionPixelSize(R.dimen.tileDimension);
 		
-		num_cols = w+BUFFER_TILE_SIZE;
-		num_rows = h+BUFFER_TILE_SIZE;
+		num_cols = w+(2*BUFFER_TILE_SIZE);
+		num_rows = h+(2*BUFFER_TILE_SIZE);
 		this.world = world;
 		
 		TileButton.generateResources();
@@ -79,6 +79,8 @@ public class TileGrid extends RelativeLayout
 		if (dir == 3)
 			originX=(originX-1+num_cols)%num_cols;
 		
+		//TODO: Get outer edge/buffer tiles to update image from World 
+		
 		updateTileLocations();
 	}
 	
@@ -113,11 +115,11 @@ public class TileGrid extends RelativeLayout
 	
 	public int getVisibleWidth()
 	{
-		return num_cols-BUFFER_TILE_SIZE;
+		return num_cols-(2*BUFFER_TILE_SIZE);
 	}
 	public int getVisibleHeight()
 	{
-		return num_rows-BUFFER_TILE_SIZE;
+		return num_rows-(2*BUFFER_TILE_SIZE);
 	}
 	
 	public int[] getButtonVisibleLoc(TileButton tb)
@@ -128,44 +130,10 @@ public class TileGrid extends RelativeLayout
 	{
 		int[] Vloc = new int[2];
 		
-		Vloc[0] = (Gloc[0]-originX+num_cols)%num_cols;
-		Vloc[1] = (Gloc[1]-originY+num_rows)%num_rows;
+		Vloc[0] = ((Gloc[0]-originX+num_cols)%num_cols)+BUFFER_TILE_SIZE;
+		Vloc[1] = ((Gloc[1]-originY+num_rows)%num_rows)+BUFFER_TILE_SIZE;
 		
 		return Vloc;
 	}
-	
-	private void temporaryFunGenerator()
-	{
-		int bearWeight 		= 1;
-		int rockWeight 		= 1;
-		int flowerWeight 	= 1;
-		int treeWeight 		= 15;
-		int emptyWeight		= 20;
-		
-		
-		/////////////////////////////////////////////////////////
-		int total = emptyWeight + treeWeight + rockWeight + flowerWeight + bearWeight;		//	10
-	
-		int bear = bearWeight;													//	1
-		int rock = rockWeight + bear;										//	3
-		int flower = flowerWeight + rock;					//	6
-		int tree = treeWeight + flower;			//	10
-		
-		int rand = 0;
-		Tile.Foreground foreground;
-		
-		for(int x = 0; x < num_cols; x++)
-			for(int y = 0; y < num_rows; y++)
-			{
-				rand = (int)(Math.random()*total);
-				
-				if(rand < bear) 		foreground = Tile.Foreground.BEAR;
-				else if(rand < rock)	foreground = Tile.Foreground.ROCK;
-				else if(rand < flower)	foreground = Tile.Foreground.FLOWER_RED;
-				else if(rand < tree)	foreground = Tile.Foreground.TREE;
-				else 					foreground = Tile.Foreground.EMPTY;
-				
-				tileButtons[x][y].setTile(new Tile(foreground));
-			}
-	}
+
 }
