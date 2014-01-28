@@ -69,17 +69,14 @@ public class MainActivity extends Activity
 			
 			int[] Gloc = tb.getGridXY();
 			
-			//System.out.println("Tapped Grid ("+Gloc[0]+","+Gloc[1]+")");
-			//System.out.println("Tapped Vis  ("+loc[0]+","+loc[1]+")");
-			
 			if (loc[0] == 0)
-				grid.move(3); //Left
+				grid.move(TileGrid.Dir.WEST); //Left
 			if (loc[1] == 0)
-				grid.move(0); //Up
+				grid.move(TileGrid.Dir.NORTH); //Up
 			if (loc[0] == grid.getVisibleWidth()-1)
-				grid.move(1); //Right
+				grid.move(TileGrid.Dir.EAST); //Right
 			if (loc[1] == grid.getVisibleHeight()-1)
-				grid.move(2); //Down
+				grid.move(TileGrid.Dir.SOUTH); //Down
 		}
 		
 	}
